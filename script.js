@@ -10,21 +10,22 @@ const app = new Vue({
     methods: {
         move(event)
         {
-            if(event.key == 'a' || event.key == 'ArrowLeft')
+            let amount = 10;
+            if((event.key == 'a' || event.key == 'ArrowLeft') && this.x > 0)
             {
-                this.x -= 10;
+                this.x -= amount;
             }
-            else if(event.key == 'd' || event.key == 'ArrowRight')
+            else if((event.key == 'd' || event.key == 'ArrowRight') && this.x < 1000 - 100)         // -100 width of the player
             {
-                this.x += 10;
+                this.x += amount;
             }
-            else if(event.key == 'w' || event.key == 'ArrowUp')
+            else if((event.key == 'w' || event.key == 'ArrowUp') && this.y > 0)
             {
-                this.y -= 10;
+                this.y -= amount;
             }
-            else if(event.key == 's' || event.key == 'ArrowDown')
+            else if((event.key == 's' || event.key == 'ArrowDown') && this.y < 600 - 100)           // -100 width of the player
             {
-                this.y += 10;
+                this.y += amount;
             }
         },
         rotate(event)
