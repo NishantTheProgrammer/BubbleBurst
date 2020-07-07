@@ -4,13 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="shortcut icon" href="./assets/player1.svg" type="image/x-icon">
     <link rel="stylesheet" href="./style.css">
     <title>BubbleBurst</title>
 </head>
 <body>
     <div class="gameDiv">
-        <!-- <h2>X:{{ x }}<br> Y: {{ y }}<br> Angle: {{ angle }}</h2> -->
+        <h2>X:{{ x }}<br> Y: {{ y }}<br> Angle: {{ angle }}</h2>
         <img src="./assets/player1.svg" :style="player"  alt="player1svg" class="player" id="player1">
+        
+        <template class="bullets" v-for="bullet in bullets">
+            <div class="bullet" 
+            :style="[{left: bullet.x + 'px'},
+                    {top: bullet.y + 'px'}]"></div>
+        </template>
+        
 
     </div>
 </body>

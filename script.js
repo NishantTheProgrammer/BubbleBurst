@@ -1,11 +1,27 @@
+const fireSound = new Audio('./sounds/fire.mp3');
+
 const app = new Vue({
     el: '.gameDiv',
     data(){
       return {
-          x: 400,
-          y: 400,
-          angle: 0
+          x: 200,
+          y: 200,
+          angle: 0,
+          bullets: []
       }  
+    },
+    created() {
+        setInterval(()=>{
+            
+            const distance = 40;
+
+            this.bullets.forEach(bullet => {
+                bullet.x += -Math.sin((Math.PI / 180) * (bullet.angle + 45)) * distance;
+                bullet.y += Math.cos((Math.PI / 180) * (bullet.angle + 45)) * distance;
+                
+                console.log(`X: ${bullet.x} Y: ${bullet.y}`);
+            });
+        }, 100)
     },
     methods: {
         move(event)
@@ -27,6 +43,10 @@ const app = new Vue({
             {
                 this.y += amount;
             }
+            else if(event.key == " ")
+            {
+                this.fire();
+            }
         },
         rotate(event)
         {
@@ -34,12 +54,33 @@ const app = new Vue({
 
             if(event.deltaY > 0)
             {
-                this.angle += 5;
+                this.angle += 10;
+                if(this.angle > 360)
+                {
+                    this.angle = 0;
+                }
             }
             else
             {
-                this.angle -= 5;
+                this.angle -= 10;
+                if(this.angle < 0)
+                {
+                    this.angle = 360;
+                }
             }
+        },
+        fire()
+        {
+            this.bullets.push({
+                x: this.x + (100/2),         // 100 is height of player 15 is height for bullet
+                y: this.y + (100/2),
+                angle: this.angle               // because our player is already rotated 45 degree
+            });
+
+
+            fireSound.play();
+
+            console.log(this.bullets);
         }
         
     },
