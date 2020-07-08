@@ -11,19 +11,25 @@ const app = new Vue({
       }  
     },
     created() {
+        /*
+        --------------------------------This function will run for each bullet-------------------------------------
+        
+            1.  If bullet goes outside the Playground it will remove that bullet
+            2.  Update Bullet position
+        */
+        
         setInterval(()=>{
-            
-            const distance = 40;
-
-            this.bullets.forEach(bullet => {
+            const distance = 30;
+            this.bullets.forEach((bullet, i) => {
+                this.outOfScreen(i);
                 bullet.x += -Math.sin((Math.PI / 180) * (bullet.angle + 45)) * distance;
                 bullet.y += Math.cos((Math.PI / 180) * (bullet.angle + 45)) * distance;
-                
-                console.log(`X: ${bullet.x} Y: ${bullet.y}`);
             });
-        }, 100)
+        }, 30)
     },
     methods: {
+
+        // Handling moving of our player (W, A, S, D) and (↑,  ←,  ↓,  →) =====> Respectively Up, Left, Down and Right
         move(event)
         {
             let amount = 10;
@@ -48,11 +54,12 @@ const app = new Vue({
                 this.fire();
             }
         },
+
+
+        // Handling mouse scroll to rotate player
         rotate(event)
         {
-            console.log(event.deltaY);
-
-            if(event.deltaY > 0)
+            if(event.deltaY > 0)            // Rotate player clockwise
             {
                 this.angle += 10;
                 if(this.angle > 360)
@@ -60,7 +67,7 @@ const app = new Vue({
                     this.angle = 0;
                 }
             }
-            else
+            else                            // Rotate anti-clockwise
             {
                 this.angle -= 10;
                 if(this.angle < 0)
@@ -69,23 +76,37 @@ const app = new Vue({
                 }
             }
         },
+
+
+        // This function will call when pressing spacebar this will push a new object in bullets array
         fire()
         {
             this.bullets.push({
-                x: this.x + (100/2),         // 100 is height of player 15 is height for bullet
+                x: this.x + (100/2),            // 100 is height of player
                 y: this.y + (100/2),
-                angle: this.angle               // because our player is already rotated 45 degree
+                angle: this.angle           
             });
-
-
             fireSound.play();
+        },
 
-            console.log(this.bullets);
+
+        // It removes the bullets which are outside the playground
+        outOfScreen(i)
+        {
+            
+            if (this.bullets[i].x < 0  ||
+                this.bullets[i].y < 0 ||
+                this.bullets[i].x > 1000 ||
+                this.bullets[i].y > 600)        
+            {
+                this.bullets.splice(i, 1);
+            }
         }
         
     },
     computed: 
     {
+        // For position and rotaion of the player
         player()
         {
             return {

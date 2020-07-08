@@ -2,9 +2,7 @@
 {
     margin: 0;
     padding: 0;
-
 }
-
 body
 {
     height: 100vh;
@@ -31,6 +29,7 @@ body
 {
     height: 100px;
     width: 100px;
+    filter: drop-shadow(0 0 5px #000000a6);
     -webkit-filter: drop-shadow(0 0 5px #000000a6);
     position: relative;
     transition: top 10ms;
@@ -38,14 +37,10 @@ body
     z-index: 2;
 
 }
-
 .gameDiv h2
 {
     position: absolute;
 }
-
-
-
 .bullet
 {
     height: 15px;
@@ -57,5 +52,4 @@ body
     transform: translate(-50%, -50%);
     z-index: 1;
     border-radius: 50px;
-    transition: all 100ms ease-in-out;
 }
