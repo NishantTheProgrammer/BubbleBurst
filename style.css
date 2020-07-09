@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
 }
+@import url('https://fonts.googleapis.com/css2?family=Modak&display=swap');
 body
 {
     height: 100vh;
@@ -40,16 +41,52 @@ body
 .gameDiv h2
 {
     position: absolute;
+    color: white;
+    font-family: 'Modak', cursive;
+    left: 20px;
+    top: 20px;
 }
 .bullet
 {
     height: 15px;
     width: 15px;
     position: absolute;
-    top: 0;
     background-color: #89ff00;
     box-shadow: 0px 0px 6px 1px black;
     transform: translate(-50%, -50%);
     z-index: 1;
     border-radius: 50px;
+}
+
+.bubble
+{
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    transform: translate(-50%, -50%);
+}
+
+div.bubbleReached
+{
+    animation-name: bubble;
+    animation: bubble 1s;
+}
+
+@keyframes bubble
+{
+    0%{
+        box-shadow: 0px 0px 20px #00000080;
+    }
+    25%{
+        box-shadow: 0px 0px 50px #ff0101;
+    }
+    50%{
+        box-shadow: 0px 0px 20px #00000080;
+    }
+    75%{
+        box-shadow: 0px 0px 50px #ff0000;
+    }
+    100%{
+        box-shadow: 0px 0px 20px #00000080;
+    }
 }

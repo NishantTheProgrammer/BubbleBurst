@@ -10,21 +10,27 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <div class="gameDiv">
-        <h2>X:{{ x }}<br> Y: {{ y }}<br> Angle: {{ angle }} <br> Bullets: {{bullets.length}}</h2>
+    <div class="gameDiv " :class="{bubbleReached: bubbleReached}">
+        <h2>Player 1: {{ score }}</h2>
         <img src="./assets/player1.svg" :style="player"  alt="player1svg" class="player" id="player1">
         
-
-        <!-- Loop throught each bullet 
-            
+        <!-- Loop throught each bullet             
             1. Add
             2. Remove
             3. Update 
         -->
-        <template class="bullets" v-for="bullet in bullets">
+        <template v-for="bullet in bullets">
             <div class="bullet" 
             :style="[{left: bullet.x + 'px'},
                     {top: bullet.y + 'px'}]"></div>
+        </template>
+        <template v-for="(bubble, color) in bubbles">
+            <img :style="[{left: bubble.x + 'px'},
+            {top: bubble.y + 'px'}]"   
+
+
+            :src="`./assets/bubble_${bubble.color}.svg`"
+            alt="bubblesvg" class="bubble">
         </template>
     </div>
 </body>
